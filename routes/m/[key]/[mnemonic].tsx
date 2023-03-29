@@ -1,10 +1,10 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { Chart } from "$fresh_charts/mod.ts";
 
 /** https://www.financialresearch.gov/short-term-funding-monitor/api-specs/api-full-single/ */
 interface FullMnemonicData {
   [foo: string]: {
     timeseries: {
-      disclosure_edits: [];
       aggregation: Array<[string, number]>;
     };
     metadata: {
@@ -17,6 +17,9 @@ interface FullMnemonicData {
         subsetting: string;
         subtype: string;
         description: string;
+      };
+      release: {
+        long_name: string;
       };
       // ...
     };
@@ -50,11 +53,27 @@ export default function Page(
   }
 
   const meta = data.data[data.mnemonic].metadata;
+  const timeseries = data.data[data.mnemonic].timeseries;
 
   return (
     <>
-      <h1>{meta.description.name}</h1>
+      <h1>{meta.release.long_name}</h1>
+      <h2>{meta.description.name}</h2>
+      <Chart
+        type="line"
+        data={{
+          labels: timeseries.aggregation.map((a) => a[0]),
+          datasets: [{
+            label: "",
+            data: timeseries.aggregation.map((a) => a[1]),
+            borderWidth: 1,
+          }],
+        }}
+      />
+      <h3>{meta.description.name}</h3>
+      <p>{meta.mnemonic}</p>
       <p>{meta.description.description}</p>
+      <p>{meta.description.notes}</p>
     </>
   );
 }
