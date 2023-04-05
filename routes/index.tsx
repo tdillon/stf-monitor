@@ -1,39 +1,27 @@
-import { Head } from "$fresh/runtime.ts";
-import MyIsland from "../islands/MyIsland.tsx";
+import { Head, asset } from "$fresh/runtime.ts";
+import LandingPage from "../components/LandingPage.tsx";
+import SelectMnemonicButton from "../islands/SelectMnemonicButton.tsx";
+import SideMenu from "../islands/SideMenu.tsx";
 
 export default function Home() {
   return (
     <>
       <Head>
         <title>Official OFR Short-term Funding Monitor</title>
-        <meta name="todo: my description here"></meta>
+        <meta charSet="utf-8" />
+        <meta name="description" content="for lighthouse"></meta>
+        <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"></link>
+        <link rel="stylesheet" href={asset("style.css")} />
       </Head>
+      <header>
+        <h1>📊 STF Monitor</h1>
+      </header>
+      <nav>
+        <SideMenu />
+      </nav>
       <main>
-        <MyIsland
-          dataset="OFR U.S. Money Market Fund Data Release"
-          kee="fnyr"
-        >
-        </MyIsland>
-        <MyIsland
-          dataset="OFR U.S. Repo Markets Data Release"
-          kee="mmf"
-        >
-        </MyIsland>
-        <MyIsland
-          dataset="Federal Reserve Bank of New York Reference Rates"
-          kee="nypd"
-        >
-        </MyIsland>
-        <MyIsland
-          dataset="Federal Reserve Bank of New York Primary Dealer Statistics"
-          kee="repo"
-        >
-        </MyIsland>
-        <MyIsland
-          dataset="Treasury Constant Maturity Rates"
-          kee="tyld"
-        >
-        </MyIsland>
+        <LandingPage />
+        <SelectMnemonicButton />
       </main>
     </>
   );

@@ -1,0 +1,7 @@
+nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--accent-bg);
+    padding: 1em;
+}
