@@ -1,6 +1,6 @@
 # fresh project
 
-### Usage
+## Usage
 
 Start the project:
 
