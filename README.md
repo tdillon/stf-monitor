@@ -17,3 +17,4 @@ Update the project:
 deno run -A -r https://fresh.deno.dev/update .
 ```
 foo 
+bar 
